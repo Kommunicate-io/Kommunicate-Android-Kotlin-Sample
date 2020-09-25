@@ -3,11 +3,11 @@ package io.kommunicate.sampleKT
 import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.applozic.mobicomkit.api.account.register.RegistrationResponse
 import com.applozic.mobicommons.commons.core.utils.Utils
 import com.applozic.mobicommons.json.GsonUtils
@@ -45,11 +45,16 @@ class LoginActivity : AppCompatActivity() {
             val password = password.text.toString().trim()
 
             if (TextUtils.isEmpty(userId)) {
-                Toast.makeText(this@LoginActivity, "username field cannot be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@LoginActivity,
+                    "username field cannot be empty",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 val kmUser = KMUser()
                 kmUser.userId = userId  //Setting userId(Only mandatory field) to kmUser
-                kmUser.password = password //Setting password(Optional, if set always neede in future logins) to kmUser
+                kmUser.password =
+                    password //Setting password(Optional, if set always neede in future logins) to kmUser
 
                 loginUser(kmUser, loading)
             }
@@ -84,7 +89,10 @@ class LoginActivity : AppCompatActivity() {
 
                 var errorText = "Some error occurred"
                 if (registrationResponse != null) {
-                    errorText = GsonUtils.getJsonFromObject(registrationResponse, registrationResponse.javaClass)
+                    errorText = GsonUtils.getJsonFromObject(
+                        registrationResponse,
+                        registrationResponse.javaClass
+                    )
                 } else if (exception != null) {
                     errorText = GsonUtils.getJsonFromObject(exception, exception.javaClass)
                 }
